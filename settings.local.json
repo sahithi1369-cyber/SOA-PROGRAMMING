@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//tmp/**)",
+      "Bash(curl -s -w '\\\\nHTTP_STATUS:%{http_code}\\\\n' http://localhost:8080/api/bills/appointment/1 -H 'Authorization: Bearer __CMDSUB_OUTPUT__')",
+      "Bash(curl -sv -X POST http://localhost:8080/api/appointments -H 'Authorization: Bearer __CMDSUB_OUTPUT__' -H 'Content-Type: application/json' -d '{\"patientId\":42,\"doctorId\":2,\"date\":\"2026-09-21T11:00:00\"}')",
+      "Bash(curl -s -w '\\\\n[STATUS:%{http_code}]\\\\n' -X POST http://localhost:8084/api/bills -H 'Authorization: Bearer __CMDSUB_OUTPUT__' -H 'Content-Type: application/json' -d '{\"appointmentId\":99,\"amount\":500.0}')",
+      "Bash(mvn spring-boot:run)",
+      "Bash(mvn -q compile)"
+    ]
+  }
+}
